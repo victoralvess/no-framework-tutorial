@@ -6,6 +6,9 @@ namespace Example;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+use \Http\HttpRequest as Request;
+use \Http\HttpResponse as Response;
+
 error_reporting(E_ALL);
 
 $environment = 'development';
@@ -23,7 +26,20 @@ if ($environment !== 'production') {
 }
 $whoops->register();
 
-throw new \Exception;
+$request = new Request($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
+$response = new Response;
 
-echo "Hello World!";
+$content = '<h1>Hello World</h1>';
+$response->setContent($content);
+$response->setStatusCode(200);
+
+foreach ($response->getHeaders() as $header) {
+  header($header, false);
+}
+
+echo $response->getContent();
+
+// throw new \Exception;
+
+// echo "Hello World!";
 
