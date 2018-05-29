@@ -51,8 +51,12 @@ switch ($routeInfo[0]) {
         break;
     case Dispatcher::FOUND:
         $handler = $routeInfo[1];
+        $controller = $handler["controller"];
+        $method = $handler["method"];
         $vars = $routeInfo[2];
-        call_user_func($handler, $vars);
+        //call_user_func($handler, $vars);
+        $class = new $controller;
+        $class->$method($vars);
         break;
 }
 
