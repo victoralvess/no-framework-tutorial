@@ -55,7 +55,7 @@ switch ($routeInfo[0]) {
         $method = $handler["method"];
         $vars = $routeInfo[2];
 
-        $class = new $controller;
+        $class = new $controller($response);
         $class->$method($vars);
         break;
 }
