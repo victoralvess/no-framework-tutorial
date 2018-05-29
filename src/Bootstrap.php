@@ -54,23 +54,11 @@ switch ($routeInfo[0]) {
         $controller = $handler["controller"];
         $method = $handler["method"];
         $vars = $routeInfo[2];
-        //call_user_func($handler, $vars);
+
         $class = new $controller;
         $class->$method($vars);
         break;
 }
 
-// $content = '<h1>Hello World</h1>';
-// $response->setContent($content);
-// $response->setStatusCode(200);
-
-// foreach ($response->getHeaders() as $header) {
-//   header($header, false);
-// }
-
 echo $response->getContent();
-
-// throw new \Exception;
-
-// echo "Hello World!";
 

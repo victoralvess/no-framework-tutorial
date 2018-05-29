@@ -13,20 +13,6 @@ return array(
                   "controller" => "Example\Controllers\Homepage",
                   "method" => "show"
               )
-        )                     
-    /*array(
-        "method" => "GET",
-        "path" => "/hello-world",
-        "handler" => function () {
-            echo "Hello World";
-        }
-    ),
-    array(
-        "method" => "GET",
-        "path" => "/another-route",
-        "handler" => function () {
-            echo "This works too";
-        }
-    )*/ 
+        )                   
 );
 
