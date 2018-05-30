@@ -6,8 +6,6 @@ namespace Example;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use \Http\HttpRequest as Request;
-use \Http\HttpResponse as Response;
 use \FastRoute\{Dispatcher, RouteCollector};
 use function \FastRoute\simpleDispatcher;
 
@@ -28,8 +26,10 @@ if ($environment !== 'production') {
 }
 $whoops->register();
 
-$request = new Request($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
-$response = new Response;
+$injector = include('Dependencies.php');
+
+$request = $injector->make('Http\HttpRequest');
+$response = $injector->make('Http\HttpResponse');
 
 $dispatcher = simpleDispatcher(function (RouteCollector $r) {
       $routes = include('Routes.php');
@@ -55,7 +55,7 @@ switch ($routeInfo[0]) {
         $method = $handler["method"];
         $vars = $routeInfo[2];
 
-        $class = new $controller($response);
+        $class = $injector->make($controller);
         $class->$method($vars);
         break;
 }
