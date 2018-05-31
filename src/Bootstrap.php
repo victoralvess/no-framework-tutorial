@@ -34,7 +34,7 @@ $response = $injector->make('Http\HttpResponse');
 $dispatcher = simpleDispatcher(function (RouteCollector $r) {
       $routes = include('Routes.php');
       foreach ($routes as $route) {
-          $r->addRoute($route['method'], $route['path'], $route['handler']);
+          $r->addRoute($route[0], $route[1], $route[2]);
       }
 });
 
@@ -51,8 +51,8 @@ switch ($routeInfo[0]) {
         break;
     case Dispatcher::FOUND:
         $handler = $routeInfo[1];
-        $controller = $handler["controller"];
-        $method = $handler["method"];
+        $controller = $handler[0];
+        $method = $handler[1];
         $vars = $routeInfo[2];
 
         $class = $injector->make($controller);
