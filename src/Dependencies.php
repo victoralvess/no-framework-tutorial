@@ -26,6 +26,14 @@ $injector->define('Mustache_Engine', [
         'extension' => '.html',
       ])
     ]
-  ]);    
+  ]);
+
+$injector->define('Example\Page\FilePageReader', [
+    ':pageFolder' => dirname(__DIR__) . '/pages',
+  ]);
+
+$injector->alias('Example\Page\PageReader', 'Example\Page\FilePageReader');
+$injector->share('Example\Page\FilePageReader');
 
 return $injector;
+
