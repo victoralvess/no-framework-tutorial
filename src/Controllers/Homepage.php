@@ -26,6 +26,7 @@ class Homepage
 
     public function show(): void 
     {
+        $cacheTime = 60 * 60 * 24 * 1;
         $data = [
           'name' => $this->request->getParameter('name', 'Stranger'),
         ];
